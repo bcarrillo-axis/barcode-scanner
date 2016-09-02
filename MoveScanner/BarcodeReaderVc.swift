@@ -14,8 +14,6 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     var session: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -80,6 +78,37 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         if (session?.running == true) {
             session.stopRunning()
         }
+    }
+    
+    func scanningNotPossible() {
+        let alert = UIAlertController(title: "Ineligible Device", message: "Please use a device with a camera", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))  //we should pop back automatically on navController instead of nil
+        presentViewController(alert, animated: true, completion: nil)
+        session = nil
+    }
+    
+    func captureOutput(captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [AnyObject]!, fromConnection connection: AVCaptureConnection!) {
+        //get first out object
+        if let barcodeData = metadataObjects.first {
+            
+            //turn into machine readable code
+            let barcodeReadable = barcodeData as? AVMetadataMachineReadableCodeObject
+            
+            if let readableCode  = barcodeReadable {
+                //send the barcode as a string to barcodeDetected()
+                barcodeDetected(readableCode.stringValue)
+            }
+            
+            //vibration feedback for a hit
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            
+            session.stopRunning()
+        }
+    }
+    
+    func barcodeDetected(code: String) {
+        let alert = UIAlertController(title: "Barcode Found", message: code, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: {action in self.navigationController?.popViewControllerAnimated(true)}))
     }
     
     override func didReceiveMemoryWarning() {

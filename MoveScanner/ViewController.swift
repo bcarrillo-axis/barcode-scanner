@@ -49,22 +49,8 @@ class ViewController: UIViewController {
     }
     
     func gotoScan() {
-        //self.navigationController?.pushViewController(BarcodeReaderVc(), animated: true)
+        self.navigationController?.pushViewController(BarcodeReaderVc(), animated: true)
     }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
