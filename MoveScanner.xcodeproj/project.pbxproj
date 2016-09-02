@@ -278,6 +278,7 @@
 				5CA295DA1D79E08C0092D298 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

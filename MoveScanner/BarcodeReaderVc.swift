@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AudioToolbox
 
 
 class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
@@ -46,6 +47,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         //Add output to the session
         if (session.canAddOutput(metadataOutput)){
             session.addOutput(metadataOutput)
+            
+            //send captured data to the delegate object via a serial queue
+            metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
             
             //send captured data to the delegate object via a serial queue
             metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code]
@@ -99,8 +103,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
                 barcodeDetected(readableCode.stringValue)
             }
             
-            //vibration feedback for a hit
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
+            //multiple forms of feedback for a hit
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate)) //iPhone only
+            AudioServicesPlaySystemSound(SystemSoundID(1108)) //all devices -- camera shutter sound
             
             session.stopRunning()
         }
@@ -109,7 +114,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     func barcodeDetected(code: String) {
         let alert = UIAlertController(title: "Barcode Found", message: code, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: {action in self.navigationController?.popViewControllerAnimated(true)}))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
