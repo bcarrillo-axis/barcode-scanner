@@ -52,7 +52,7 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
             metadataOutput.setMetadataObjectsDelegate(self, queue: dispatch_get_main_queue())
             
             //send captured data to the delegate object via a serial queue
-            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code]
+            metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code]
         } else {
             scanningNotPossible()
         }

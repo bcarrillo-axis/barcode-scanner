@@ -12,7 +12,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //add mars for testing blur
+//        let marsView = UIImageView(image: UIImage(named: "mars"))
+//        self.view.addSubview(marsView)
+        
+        //blur Effect
+//        let blurEffect = UIBlurEffect(style: .Light)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = self.view.bounds
+//        self.view.addSubview(blurEffectView)
 
+        
+        
+        
         self.title = "Usage Scanner"
         
         //Scan button in nav bar
@@ -36,7 +49,7 @@ class ViewController: UIViewController {
         instructionLbl.numberOfLines = 0
         
         
-        view.addSubview(instructionLbl)
+        view.insertSubview(instructionLbl, atIndex: 1)
         instructionLbl.translatesAutoresizingMaskIntoConstraints = false
     
         NSLayoutConstraint.activateConstraints([
@@ -44,8 +57,6 @@ class ViewController: UIViewController {
             instructionLbl.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant:10),
             instructionLbl.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: -10),
         ])
-        
-        
     }
     
     func gotoScan() {
