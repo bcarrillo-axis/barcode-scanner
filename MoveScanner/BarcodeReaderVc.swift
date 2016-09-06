@@ -63,6 +63,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.addSublayer(previewLayer)
         
+        //target area -- everything outside this rect not considered for bar code recognition
+        previewLayer.rectForMetadataOutputRectOfInterest(CGRect(x: 0, y: (view.frame.height/4)+84,width: view.frame.width, height: view.frame.height/4))
+        
         //begin the capture session
         session.startRunning()
         
