@@ -26,15 +26,17 @@ class InterestRect: UIView {
     }
     
     override func drawRect(rect: CGRect) {
-        let context = UIGraphicsGetCurrentContext()
+        self.backgroundColor?.setFill()
+        UIRectFill(rect)
         
-        var uRect = self.superview!.frame
-        var oRect = self.frame
+        let layer = CAShapeLayer()
+        let path = CGPathCreateMutable()
         
-        var rectIntersect = CGRectIntersection(uRect, oRect)
+        CGPathAddRect(path, nil, self.superview!.frame)
+        CGPathAddRect(path, nil, bounds)
         
-        UIColor.clearColor().setFill()
-        UIRectFill(rectIntersect)
-        
+        layer.path = path
+        layer.fillRule = kCAFillRuleEvenOdd
+        self.layer.mask = layer
     }
 }
