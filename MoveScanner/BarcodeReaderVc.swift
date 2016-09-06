@@ -73,6 +73,24 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         
         createOverlay(CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
         
+        let statusLbl = UILabel()
+        let statusMessage = "Scanning..."
+        
+        statusLbl.text = statusMessage
+        statusLbl.textColor = UIColor.whiteColor()
+        statusLbl.textAlignment = .Center
+        statusLbl.font = UIFont(name: "Arial", size: 30) //Use themed font
+        statusLbl.sizeToFit()
+        
+        view.addSubview(statusLbl)
+        statusLbl.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints([
+            statusLbl.bottomAnchor.constraintEqualToAnchor(self.bottomLayoutGuide.topAnchor, constant: -20), //plan to use negative ThemeGutter
+            statusLbl.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor),
+            statusLbl.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor)
+            ])
+        
     }
     
     func createOverlay(frame: CGRect) {
