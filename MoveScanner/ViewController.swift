@@ -14,20 +14,23 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //add mars for testing blur
-//        let marsView = UIImageView(image: UIImage(named: "mars"))
-//        self.view.addSubview(marsView)
+        let marsView = UIImageView(image: UIImage(named: "mars"))
+        self.view.addSubview(marsView)
         
         //blur Effect
-//        let blurEffect = UIBlurEffect(style: .Light)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = self.view.bounds
-//        self.view.addSubview(blurEffectView)
-
+        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        self.view.addSubview(blurEffectView)
+        
+//        var scannerRect = CGRect(x: 0, y: 0, width: 30, height: 30)
+//        CGRectInset(scannerRect, 10,10)
+//        UIView(frame: self.frame.origin
+//        blurEffectView.addSubview( )
         
         
         
         self.title = "Usage Scanner"
-        
         //Scan button in nav bar
         let scanBtn = UIBarButtonItem(barButtonSystemItem: .Camera, target: self, action: #selector(gotoScan))
         self.navigationItem.rightBarButtonItem = scanBtn
@@ -57,6 +60,26 @@ class ViewController: UIViewController {
             instructionLbl.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant:10),
             instructionLbl.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: -10),
         ])
+        
+        let ir = InterestRect()
+        
+        view.insertSubview(ir, atIndex: 3)
+        ir.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activateConstraints([
+            ir.topAnchor.constraintEqualToAnchor(self.topLayoutGuide.bottomAnchor, constant: 100),
+            ir.leadingAnchor.constraintEqualToAnchor(self.view.leadingAnchor, constant:10),
+            ir.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: -10),
+            ir.bottomAnchor.constraintEqualToAnchor(self.view.bottomAnchor, constant: -100)
+            ])
+        
+//        let interestRect = UIView()
+//        interestRect.backgroundColor = UIColor.cyanColor()
+//        interestRect.frame = CGRectInset(view.frame, 10, 300)
+//        
+//        view.addSubview(interestRect)
+//        
+        
     }
     
     func gotoScan() {
