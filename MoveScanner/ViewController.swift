@@ -14,8 +14,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //add mars for testing blur
-        let marsView = UIImageView(image: UIImage(named: "mars"))
-        self.view.addSubview(marsView)
+//        let marsView = UIImageView(image: UIImage(named: "mars"))
+//        self.view.addSubview(marsView)
         
         self.title = "Usage Scanner"
         //Scan button in nav bar
@@ -48,38 +48,12 @@ class ViewController: UIViewController {
             instructionLbl.trailingAnchor.constraintEqualToAnchor(self.view.trailingAnchor, constant: -10),
         ])
         
-        createOverlay(CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        
 
         
     }
     
-    func createOverlay(frame: CGRect) {
-        
-        //blur Effect
-        let blurEffect = UIBlurEffect(style: .Dark)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.view.bounds
-        self.view.addSubview(blurEffectView)
-        
-        let overlayView = blurEffectView
-        self.view.addSubview(overlayView)
-        
-        let maskLayer = CAShapeLayer()
-        
-        //create a path with the rect in in it
-        let path = CGPathCreateMutable()
-        
-        CGPathAddRect(path, nil, CGRectMake(0, (overlayView.frame.height/4)+84, overlayView.frame.width, overlayView.frame.height/4))
-        CGPathAddRect(path, nil, CGRectMake(0,0, overlayView.frame.width, overlayView.frame.height))
-        
-        maskLayer.path = path
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        
-        //release the path since its not covered by ARC
-        overlayView.layer.mask = maskLayer
-        overlayView.clipsToBounds = true
-        
-    }
+
     
     func gotoScan() {
         self.navigationController?.pushViewController(BarcodeReaderVc(), animated: true)

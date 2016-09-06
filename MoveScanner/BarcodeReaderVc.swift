@@ -53,6 +53,10 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
             
             //send captured data to the delegate object via a serial queue
             metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code]
+            
+            let interestRect = CGRectMake(0,0.25, 1, 0.75)
+            metadataOutput.rectForMetadataOutputRectOfInterest(interestRect)
+            
         } else {
             scanningNotPossible()
         }
@@ -63,11 +67,39 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         view.layer.addSublayer(previewLayer)
         
-        //target area -- everything outside this rect not considered for bar code recognition
-        previewLayer.rectForMetadataOutputRectOfInterest(CGRect(x: 0, y: (view.frame.height/4)+84,width: view.frame.width, height: view.frame.height/4))
         
         //begin the capture session
         session.startRunning()
+        
+        createOverlay(CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        
+    }
+    
+    func createOverlay(frame: CGRect) {
+        
+        //blur Effect
+        let blurEffect = UIBlurEffect(style: .Dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.bounds
+        self.view.addSubview(blurEffectView)
+        
+        let overlayView = blurEffectView
+        self.view.addSubview(overlayView)
+        
+        let maskLayer = CAShapeLayer()
+        
+        //create a path with the rect in in it
+        let path = CGPathCreateMutable()
+        
+        CGPathAddRect(path, nil, CGRectMake(0, (overlayView.frame.height/4)+84, overlayView.frame.width, overlayView.frame.height/4))
+        CGPathAddRect(path, nil, CGRectMake(0,0, overlayView.frame.width, overlayView.frame.height))
+        
+        maskLayer.path = path
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        
+        //release the path since its not covered by ARC
+        overlayView.layer.mask = maskLayer
+        overlayView.clipsToBounds = true
         
     }
     
