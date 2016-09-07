@@ -16,7 +16,13 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     var previewLayer: AVCaptureVideoPreviewLayer!
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        
+        
+        
+        
+        let value = UIInterfaceOrientation.LandscapeRight.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        
         
         //create the session
         session = AVCaptureSession()
@@ -54,7 +60,7 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
             //send captured data to the delegate object via a serial queue
             metadataOutput.metadataObjectTypes = [AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code]
             
-            let interestRect = CGRectMake(0,0.25, 1, 0.75)
+            let interestRect = CGRectMake(0, 0.25, 1, 0.75)
             metadataOutput.rectForMetadataOutputRectOfInterest(interestRect)
             
         } else {
@@ -63,8 +69,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         
         //add preview layer
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = view.layer.bounds
+        previewLayer.connection.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
         previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer.frame = view.layer.bounds
         view.layer.addSublayer(previewLayer)
         
         
@@ -91,7 +98,21 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
             statusLbl.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor)
             ])
         
+        self.view.layoutIfNeeded()
+        
+        super.viewDidLoad()
+
     }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .LandscapeRight
+    }
+    
+    override func shouldAutorotate() -> Bool {
+        return true
+    }
+    
+
     
     func createOverlay(frame: CGRect) {
         
@@ -109,7 +130,7 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         //create a path with the rect in in it
         let path = CGPathCreateMutable()
         
-        CGPathAddRect(path, nil, CGRectMake(0, (overlayView.frame.height/4)+84, overlayView.frame.width, overlayView.frame.height/4))
+        CGPathAddRect(path, nil, CGRectMake(0, (overlayView.frame.height/4) + self.navigationController!.navigationBar.frame.size.height, overlayView.frame.width, overlayView.frame.height/4))
         CGPathAddRect(path, nil, CGRectMake(0,0, overlayView.frame.width, overlayView.frame.height))
         
         maskLayer.path = path
@@ -119,6 +140,13 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         overlayView.layer.mask = maskLayer
         overlayView.clipsToBounds = true
         
+      
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        view.setNeedsLayout()
+        view.setNeedsDisplay()
     }
     
     override func viewWillAppear(animated: Bool) {

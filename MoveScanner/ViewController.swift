@@ -27,8 +27,8 @@ class ViewController: UIViewController {
         
         let instructionLbl = UILabel()
         let instructionText = "Instructions for Scanning: \n\n" +
-                              "1. Ensure you are in a well lit environment \n" +
-                              "2. Position so that entire barcode lies within center rectangle \n" +
+                              "1. Ensure you are in a well lit environment \n\n" +
+                              "2. Position so that entire barcode lies within center rectangle \n\n" +
                               "3. Hold the camera steady to allow a clear focus on the barcode"
         let attributedText = NSMutableAttributedString(string: instructionText)
         let textRange = NSMakeRange(0, 26)
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
 
         
     }
+    
     
 
     
