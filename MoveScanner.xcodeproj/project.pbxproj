@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1DE2451D7FA59C0006D360 /* BarcodeReaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1DE2441D7FA59C0006D360 /* BarcodeReaderView.swift */; };
 		5CA295CA1D79E08C0092D298 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA295C91D79E08C0092D298 /* AppDelegate.swift */; };
 		5CA295CC1D79E08C0092D298 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA295CB1D79E08C0092D298 /* ViewController.swift */; };
 		5CA295D11D79E08C0092D298 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CA295D01D79E08C0092D298 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C1DE2441D7FA59C0006D360 /* BarcodeReaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderView.swift; sourceTree = "<group>"; };
 		5CA295C61D79E08C0092D298 /* MoveScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoveScanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CA295C91D79E08C0092D298 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5CA295CB1D79E08C0092D298 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				5CA295D01D79E08C0092D298 /* Assets.xcassets */,
 				5CA295D21D79E08C0092D298 /* LaunchScreen.storyboard */,
 				5CA295D51D79E08C0092D298 /* Info.plist */,
+				5C1DE2441D7FA59C0006D360 /* BarcodeReaderView.swift */,
 			);
 			path = MoveScanner;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C1DE2451D7FA59C0006D360 /* BarcodeReaderView.swift in Sources */,
 				5CA295DC1D7A05890092D298 /* BarcodeReaderVc.swift in Sources */,
 				5CA295CC1D79E08C0092D298 /* ViewController.swift in Sources */,
 				5CA295CA1D79E08C0092D298 /* AppDelegate.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +53,16 @@ class ViewController: UIViewController {
         
     }
     
+
+    func barcodeDetected(code: String) {
+        let alert = UIAlertController(title: "Barcode Found", message: code, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Destructive, handler: {action in self.navigationController?.popViewControllerAnimated(true)}))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
     
 
     
@@ -60,11 +70,7 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(BarcodeReaderVc(), animated: true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+    
 
 }
 
