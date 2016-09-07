@@ -15,10 +15,8 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     var session: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
     
-    override func viewDidLoad() {
-        
-        
-        
+     override func viewDidLoad() {
+        super.viewDidLoad()
         
         let value = UIInterfaceOrientation.LandscapeRight.rawValue
         UIDevice.currentDevice().setValue(value, forKey: "orientation")
@@ -99,18 +97,22 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
             ])
         
         self.view.layoutIfNeeded()
-        
-        super.viewDidLoad()
 
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .LandscapeRight
-    }
-    
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        
+//        self.willRotateToInterfaceOrientation(UIInterfaceOrientation.LandscapeRight, duration: 0.0)
+//    }
+//    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return .LandscapeRight
+//    }
+//    
+//    override func shouldAutorotate() -> Bool {
+//        return false
+//    }
     
 
     
@@ -144,10 +146,10 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         
     }
     
-    override func viewWillLayoutSubviews() {
-        view.setNeedsLayout()
-        view.setNeedsDisplay()
-    }
+//    override func viewWillLayoutSubviews() {
+//        view.setNeedsLayout()
+//        view.setNeedsDisplay()
+//    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
