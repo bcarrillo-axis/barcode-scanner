@@ -18,9 +18,7 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
      override func viewDidLoad() {
         super.viewDidLoad()
         
-        let value = UIInterfaceOrientation.LandscapeRight.rawValue
-        UIDevice.currentDevice().setValue(value, forKey: "orientation")
-        
+
         
         //create the session
         session = AVCaptureSession()
@@ -100,6 +98,8 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
 
     }
     
+    //THESE ONLY WORK WHEN NOT EMBEDDED INSIDE A NAV CONTROLLER
+    
 //    override func viewDidAppear(animated: Bool) {
 //        super.viewDidAppear(animated)
 //        
@@ -110,9 +110,9 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
 //        return .LandscapeRight
 //    }
 //    
-//    override func shouldAutorotate() -> Bool {
-//        return false
-//    }
+    override func shouldAutorotate() -> Bool { //
+        return false
+    }
     
 
     
@@ -146,10 +146,6 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
         
     }
     
-//    override func viewWillLayoutSubviews() {
-//        view.setNeedsLayout()
-//        view.setNeedsDisplay()
-//    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -203,6 +199,12 @@ class BarcodeReaderVc: UIViewController, AVCaptureMetadataOutputObjectsDelegate 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension UINavigationController {
+    public override func shouldAutorotate() -> Bool {
+        return visibleViewController!.shouldAutorotate()
     }
 }
 

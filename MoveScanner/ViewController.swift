@@ -49,14 +49,13 @@ class ViewController: UIViewController {
         ])
         
         
-
-        
     }
-    
     
 
     
     func gotoScan() {
+        let value = UIInterfaceOrientation.LandscapeRight.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
         self.navigationController?.pushViewController(BarcodeReaderVc(), animated: true)
     }
     
